@@ -1,3 +1,4 @@
+from time import sleep
 import yaml
 from yaml.loader import SafeLoader
 import datetime;
@@ -18,8 +19,10 @@ def timefunction2(mainkey,data):
             timefunction3(mainkey,data[mainkey]['Activities'][key],key)
         if 'Inputs' in (data[mainkey]['Activities'][key]):
             inputs=data[mainkey]['Activities'][key]['Inputs']
+            time=inputs['ExecutionTime']
             inputs='('+inputs['FunctionInput']+', '+inputs['ExecutionTime']+')'+'\n'
             s=str(timefunction())+';'+str(temp)+' '+'Executing ' +str('TimeFunction')+' '+str(inputs)
+            sleep(int(time))
             output.write(s)
         s=str(timefunction())+';'+str(temp)+' Exit'+'\n'
         output.write(s)
@@ -33,8 +36,11 @@ def timefunction3(mainkey,data,keys):
             timefunction3(mainkey,data[mainkey]['Activities'][key])
         if 'Inputs' in (data['Activities'][key]):
             inputs=data['Activities'][key]['Inputs']
+            time=inputs['ExecutionTime']
             inputs='('+inputs['FunctionInput']+', '+inputs['ExecutionTime']+')'+'\n'
             s=str(timefunction())+';'+str(temp)+' '+'Executing '+str('TimeFunction')+' '+str(inputs)
+            sleep(int(time))
+            
             output.write(s)
         s=str(timefunction())+';'+str(temp)+' Exit'+'\n'
         output.write(s)
